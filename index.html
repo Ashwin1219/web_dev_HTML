@@ -98,15 +98,16 @@
         <script src="https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore-compat.js"></script>
 
         <script>
-            const firebaseConfig = {
-            apiKey: "AIzaSyC0dmL0bgF5F0hjjhHnb5K0fS1YXZOVg7E",
-            authDomain: "sample1-1a7f8.firebaseapp.com",
-            projectId: "sample1-1a7f8",
-            storageBucket: "sample1-1a7f8.firebasestorage.app",
-            messagingSenderId: "897605192520",
-            appId: "1:897605192520:web:419426059e5ffda077417d",
-            measurementId: "G-P5NPFRSS10"
+           const firebaseConfig = {
+            apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+            authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+            projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+            storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+            messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+            appId: import.meta.env.VITE_FIREBASE_APP_ID,
+            measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID
             };
+
 
 
             firebase.initializeApp(firebaseConfig);
