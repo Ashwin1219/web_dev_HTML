@@ -9,6 +9,9 @@
     <body style="background-color:green">
         <h1 style="color: blue; background-color: black;">Periyar Kalakshethra</h1>
         <br/><hr/>
+        <div id="readitems">
+
+        </div>
         <p style="color:darkblue;background-color:green;font-weight:bolder;font-size: large;">my paragraph</p>
         <p>my <b>bold </b> paragraph</p>
         <p>my <i>itallic</i> paragraph</p>
@@ -18,12 +21,149 @@
         <img width="500" src="https://media.assettype.com/evoindia/2024-10-17/l4gkuryq/514c453f-bdd2-4068-b88f-7d0fa4579290.jpg" alt="nice car baby"/>
         <br/>
         <iframe width="560" height="315" src="https://www.youtube.com/embed/pQN-pnXPaVg?si=8dt2sWx08iMjiicl" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-        <ul>
+        
+        <!-- lists are from here -->
+
+
+        <ol type="i">
             <li><a href="#">fruits</a></li>
             <li style="color:aqua"> apple</li>
             <li> orange</li>
+            <ol type="a">
+                <li>sweet orange</li>
+                <li>sweet orange</li>
+                <li>sweet orange</li>
+            </ol>
+            
             <li> banana</li>
-        </ul>
+        </ol>
+        <dl>
+            <dt>Apples</dt>
+            <dd>- They are red </dd>
+            <dd>-very sweet</dd>
+            <dt>orange</dt>
+            <dd>-they are orange</dd>
+        </dl>
+
+        <!--table from here-->
+        <table>
+            <caption><h2>These are Tables</h2></caption>
+            <thead>
+                <tr>
+                    <th>one</th>
+                    <th>two</th>
+                    <th>three</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>ashwin</td>
+                    <td>aboos</td>
+                    <td>alinda</td>
+                </tr>
+                <tr>
+                    <td>gokul</td>
+                    <td>joel</td>
+                    <td>ashin</td>
+                </tr>
+                <tr>
+                    <td>tintu</td>
+                    <td>tessy</td>
+                    <td>looyi</td>
+                </tr>
+        </tbody>
+        </table>
+        <br/>
+        <hr/>
+        <br/>
+        <form>
+            <div>
+                <label>First Name</label>
+                <input type="text" name="firstName"/>
+             </div>
+             <br/>
+             <div>
+                <label>Last Name</label>
+                <input type="text" name="lastName"/>
+            </div>
+            <br/>
+            <div>
+                <label>Email</label>
+                <input type="email" name="email"/>
+
+                <button type="button" onclick="addData()"> submit </button>
+            </div>
+        </form>
+        <script src="https://www.gstatic.com/firebasejs/11.10.0/firebase-app-compat.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore-compat.js"></script>
+
+        <script>
+            const firebaseConfig = {
+            apiKey: "AIzaSyC0dmL0bgF5F0hjjhHnb5K0fS1YXZOVg7E",
+            authDomain: "sample1-1a7f8.firebaseapp.com",
+            projectId: "sample1-1a7f8",
+            storageBucket: "sample1-1a7f8.firebasestorage.app",
+            messagingSenderId: "897605192520",
+            appId: "1:897605192520:web:419426059e5ffda077417d",
+            measurementId: "G-P5NPFRSS10"
+            };
+
+
+            firebase.initializeApp(firebaseConfig);
+
+            const db = firebase.firestore();
+
+            function addData() {
+
+                const firstName = document.querySelector('input[name="firstName"]').value;
+                const lastName = document.querySelector('input[name="lastName"]').value;
+                const email =document.querySelector('input[name="email"]').value;
+                db.collection('registration').add({
+                    firstname:firstName,
+                    lastname:lastName,
+                    email:email
+                })
+                .then((docRef)=> {
+                    alert("Document written with ID: " + docRef.id);
+                })
+                .catch((error)=>{
+                    alert("Error adding document: " + error);
+                });
+            }
+
+
+            function readData(){
+                
+                db.collection('registration').get().then((querySnapshot)=>{
+                    const userDiv = document.getElementById('readitems');
+                    
+
+
+                    querySnapshot.forEach((doc) => {
+                        const out = doc.data();
+                        const first = document.createElement('h1')
+                        const last  = document.createElement('h1')
+                        const Useremail = document.createElement('h3')
+
+
+                        first.innerHTML = out.firstname;
+                        last.innerHTML = out.lastname;
+                        Useremail.innerHTML = out.email;
+                        userDiv.appendChild(first);
+                        userDiv.appendChild(last);
+                        userDiv.appendChild(Useremail);
+                    });
+                })
+
+            }
+
+            window.onload = readData;
+        </script>
+        
+
+   
+
+
     </body>
 
 
